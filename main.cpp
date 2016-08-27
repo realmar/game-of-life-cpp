@@ -157,6 +157,64 @@ void keyboardInput(unsigned char key, int x, int y) {
       continue_calc = true;
       FPS = INITIAL_FPS;
       return;
+    case '1':
+      // glider gun
+
+      initCells(false);
+      unsigned int start_x = (unsigned int)(ROWS / 2) - 18;
+      unsigned int start_y = (unsigned int)(COLUMNS / 2) - 4;
+
+      cells[start_y][start_x] = true;
+      cells[start_y][start_x + 1] = true;
+      cells[start_y + 1][start_x] = true;
+      cells[start_y + 1][start_x + 1] = true;
+
+      cells[start_y][start_x + 10] = true;
+      cells[start_y + 1][start_x + 10] = true;
+      cells[start_y - 1][start_x + 10] = true;
+
+      cells[start_y + 2][start_x + 10 + 1] = true;
+      cells[start_y - 2][start_x + 10 + 1] = true;
+
+      cells[start_y + 3][start_x + 10 + 2] = true;
+      cells[start_y - 3][start_x + 10 + 2] = true;
+      cells[start_y + 3][start_x + 10 + 3] = true;
+      cells[start_y - 3][start_x + 10 + 3] = true;
+
+      cells[start_y][start_x + 10 + 4] = true;
+
+      cells[start_y + 2][start_x + 10 + 5] = true;
+      cells[start_y - 2][start_x + 10 + 5] = true;
+
+      cells[start_y + 1][start_x + 10 + 6] = true;
+      cells[start_y][start_x + 10 + 6] = true;
+      cells[start_y - 1][start_x + 10 + 6] = true;
+
+      cells[start_y][start_x + 10 + 7] = true;
+
+      cells[start_y + 1][start_x + 20] = true;
+      cells[start_y + 2][start_x + 20] = true;
+      cells[start_y + 3][start_x + 20] = true;
+
+      cells[start_y + 1][start_x + 21] = true;
+      cells[start_y + 2][start_x + 21] = true;
+      cells[start_y + 3][start_x + 21] = true;
+
+      cells[start_y + 4][start_x + 22] = true;
+      cells[start_y][start_x + 22] = true;
+
+      cells[start_y + 5][start_x + 24] = true;
+      cells[start_y + 4][start_x + 24] = true;
+      cells[start_y][start_x + 24] = true;
+      cells[start_y - 1][start_x + 24] = true;
+
+      cells[start_y + 2][start_x + 34] = true;
+      cells[start_y + 3][start_x + 34] = true;
+
+      cells[start_y + 2][start_x + 35] = true;
+      cells[start_y + 3][start_x + 35] = true;
+
+      return;
   }
 }
 

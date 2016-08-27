@@ -14,6 +14,9 @@ r: randomize cells
 
 mouse click: toggle cell
 mouse drag: revive cells
+
+# models
+1: glider gun
 ```
 
 ### Compile
