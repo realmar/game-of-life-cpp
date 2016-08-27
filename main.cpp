@@ -147,8 +147,11 @@ void timer(int) {
 
 void keyboardInput(unsigned char key, int x, int y) {
   switch(key) {
-    case 'c' :
+    case 'c':
       initCells(false);
+      return;
+    case 'r':
+      initCells();
       return;
     case 's':
       continue_calc = true;
