@@ -11,6 +11,7 @@
 #include <GL/glut.h>
 
 #include <iostream>
+#include <algorithm>
 
 const unsigned int WIDTH = 512;
 const unsigned int HEIGHT = 512;
@@ -85,6 +86,9 @@ unsigned int getAliveNeightborCount(const int y, const int x) {
 }
 
 void recalculateCells(void) {
+  bool new_cells[COLUMNS][ROWS];
+  std::copy(&cells[0][0], &cells[0][0] + ROWS * COLUMNS, &new_cells[0][0]);
+
   for(unsigned int i = 0; i < COLUMNS; i++) {
     for(unsigned int j = 0; j < ROWS; j++) {
       // source of comments on the behavior are from wikipedia (https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
@@ -97,17 +101,19 @@ void recalculateCells(void) {
         // and
         // Any live cell with more than three live neighbours dies, as if by over-population.
         if(n_count < 2 || n_count > 3)
-          cells[i][j] = false;
+          new_cells[i][j] = false;
 
         // Any live cell with two or three live neighbours lives on to the next generation.
         // nothing to do here, the cell survives
       }else{    // dead
         // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
         if(n_count == 3)
-          cells[i][j] == true;
+          new_cells[i][j] == true;
       }
     }
   }
+
+  std::copy(&new_cells[0][0], &new_cells[0][0] + ROWS * COLUMNS, &cells[0][0]);
 }
 
 void renderFunction(void) {
