@@ -1,4 +1,4 @@
-#define FPS 4
+#define INITIAL_FPS 2;
 
 #define ALIVE_CELL_COLOR glColor3f(0.0f, 0.0f, 0.0f);
 #define DEAD_CELL_COLOR glColor3f(1.0f, 1.0f, 1.0f);
@@ -18,6 +18,8 @@ const unsigned int HEIGHT = 512;
 const unsigned int ROWS = 40;
 const unsigned int COLUMNS = 40;
 
+unsigned int FPS = INITIAL_FPS;
+
 const float CELL_WIDTH = (float)WIDTH / (float)ROWS;
 const float CELL_HEIGHT = (float)HEIGHT / (float)COLUMNS;
 
@@ -36,6 +38,7 @@ void initCells(bool randomize) {
   }
 
   continue_calc = randomize;
+  if(!randomize) FPS = 60;
 }
 
 void init(void) {
@@ -143,16 +146,24 @@ void keyboardInput(unsigned char key, int x, int y) {
       return;
     case 's':
       continue_calc = true;
+      FPS = INITIAL_FPS;
       return;
   }
 }
 
+void adaptCell(const int& mx, const int& my, const bool& revert = true) {
+  unsigned int x = (unsigned int)(mx / CELL_WIDTH);
+  unsigned int y = COLUMNS - (unsigned int)(my / CELL_HEIGHT) - 1;
+  if(revert) cells[y][x] = !cells[y][x];
+  else cells[y][x] = true;
+}
+
 void mouseInput(int button, int state, int mx, int my) {
-  if(state == GLUT_UP) {
-    unsigned int x = (unsigned int)(mx / CELL_WIDTH);
-    unsigned int y = COLUMNS - (unsigned int)(my / CELL_HEIGHT) - 1;
-    cells[y][x] = !cells[y][x];
-  }
+  if(state == GLUT_UP) adaptCell(mx, my);
+}
+
+void continuousMouseInput(int mx, int my) {
+  adaptCell(mx, my, false);
 }
 
 int main(int argc, char** argv) {
@@ -163,6 +174,7 @@ int main(int argc, char** argv) {
   glutDisplayFunc(renderFunction);
   glutKeyboardFunc(keyboardInput);
   glutMouseFunc(mouseInput);
+  glutMotionFunc(continuousMouseInput);
 
   init();
 
