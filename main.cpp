@@ -10,8 +10,8 @@
 const unsigned int WIDTH = 512;
 const unsigned int HEIGHT = 512;
 
-const unsigned int ROWS = 40;
-const unsigned int COLUMNS = 40;
+const unsigned int ROWS = 80;
+const unsigned int COLUMNS = 80;
 
 const float CELL_WIDTH = (float)WIDTH / (float)ROWS;
 const float CELL_HEIGHT = (float)HEIGHT / (float)COLUMNS;
@@ -42,6 +42,7 @@ void init(void) {
 void recalculateCells(void) {
   for(unsigned int i = 0; i < COLUMNS; i++) {
     for(unsigned int j = 0; j < ROWS; j++) {
+      // source of comments on the behavior are from wikipedia (https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
     }
   }
 }
@@ -70,6 +71,11 @@ void renderFunction(void) {
   glutSwapBuffers();
 }
 
+void timer(int) {
+  glutPostRedisplay();
+  glutTimerFunc(1000 / 20, timer, 0);
+}
+
 int main(int argc, char** argv) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_SINGLE);
@@ -77,6 +83,9 @@ int main(int argc, char** argv) {
   glutCreateWindow("Game Of Life");
   glutDisplayFunc(renderFunction);
   init();
+
+  glutTimerFunc(1000 / 20, timer, 0);
+
   glutMainLoop();
   return 0;
 }
