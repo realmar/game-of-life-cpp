@@ -59,27 +59,27 @@ unsigned int getAliveNeightborCount(const int y, const int x) {
   if(cells[y][ROUND_ZERO(x)])
     neighbours++;
 
-  if(cells[y][ROUND_MAX(x, WIDTH)])
+  if(cells[y][ROUND_MAX(x, COLUMNS)])
     neighbours++;
 
   // vertical neighbours
   if(cells[ROUND_ZERO(y)][x])
     neighbours++;
 
-  if(cells[ROUND_MAX(y, HEIGHT)][x])
+  if(cells[ROUND_MAX(y, COLUMNS - 1)][x])
     neighbours++;
 
   // diagonal neighbours
-  if(cells[ROUND_ZERO(y)][ROUND_MAX(x, WIDTH)])
+  if(cells[ROUND_ZERO(y)][ROUND_MAX(x, ROWS - 1)])
     neighbours++;
 
   if(cells[ROUND_ZERO(y)][ROUND_ZERO(x)])
     neighbours++;
 
-  if(cells[ROUND_MAX(y, HEIGHT)][ROUND_MAX(x, WIDTH)])
+  if(cells[ROUND_MAX(y, COLUMNS - 1)][ROUND_MAX(x, ROWS - 1)])
     neighbours++;
 
-  if(cells[ROUND_MAX(y, HEIGHT)][ROUND_ZERO(x)])
+  if(cells[ROUND_MAX(y, COLUMNS - 1)][ROUND_ZERO(x)])
     neighbours++;
 
   return neighbours;
@@ -108,7 +108,7 @@ void recalculateCells(void) {
       }else{    // dead
         // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
         if(n_count == 3)
-          new_cells[i][j] == true;
+          new_cells[i][j] = true;
       }
     }
   }
