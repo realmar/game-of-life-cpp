@@ -4,6 +4,8 @@ Reference: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
 This is a simple implementation of the game of life in a finite space using c++ and opengl.
 
+With finite space I mean that the cells will interact with the border of the window as if their world ends there.
+
 ### Controls
 ```sh
 c: clear screen

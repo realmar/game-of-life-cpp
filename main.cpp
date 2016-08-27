@@ -151,7 +151,7 @@ void keyboardInput(unsigned char key, int x, int y) {
       initCells(false);
       return;
     case 'r':
-      initCells();
+      initCells(true);
       return;
     case 's':
       continue_calc = true;
