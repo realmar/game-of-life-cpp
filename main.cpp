@@ -15,23 +15,27 @@
 const unsigned int WIDTH = 512;
 const unsigned int HEIGHT = 512;
 
-const unsigned int ROWS = 80;
-const unsigned int COLUMNS = 80;
+const unsigned int ROWS = 40;
+const unsigned int COLUMNS = 40;
 
 const float CELL_WIDTH = (float)WIDTH / (float)ROWS;
 const float CELL_HEIGHT = (float)HEIGHT / (float)COLUMNS;
 
 bool cells[COLUMNS][ROWS];
 
-void initCells(void) {
+bool continue_calc = true;
+
+void initCells(bool randomize) {
   for(unsigned int i = 0; i < COLUMNS; i++) {
     for(unsigned int j = 0; j < ROWS; j++) {
-      if((int)rand()%2 == 0)
+      if((int)rand()%2 == 0 || !randomize)
         cells[i][j] = false;
       else
         cells[i][j] = true;
     }
   }
+
+  continue_calc = randomize;
 }
 
 void init(void) {
@@ -41,7 +45,7 @@ void init(void) {
   gluOrtho2D(0.0, 1.0, 0.0, 1.0);
   glMatrixMode(GL_MODELVIEW);
 
-  initCells();
+  initCells(true);
 }
 
 unsigned int getAliveNeightborCount(const int y, const int x) {
@@ -123,7 +127,7 @@ void renderFunction(void) {
     }
   }
 
-  recalculateCells();
+  if(continue_calc) recalculateCells();
   glutSwapBuffers();
 }
 
@@ -132,12 +136,34 @@ void timer(int) {
   glutTimerFunc(1000 / FPS, timer, 0);
 }
 
+void keyboardInput(unsigned char key, int x, int y) {
+  switch(key) {
+    case 'c' :
+      initCells(false);
+      return;
+    case 's':
+      continue_calc = true;
+      return;
+  }
+}
+
+void mouseInput(int button, int state, int mx, int my) {
+  if(state == GLUT_UP) {
+    unsigned int x = (unsigned int)(mx / CELL_WIDTH);
+    unsigned int y = COLUMNS - (unsigned int)(my / CELL_HEIGHT) - 1;
+    cells[y][x] = !cells[y][x];
+  }
+}
+
 int main(int argc, char** argv) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_SINGLE);
   glutInitWindowSize(WIDTH, HEIGHT);
   glutCreateWindow("Game Of Life");
   glutDisplayFunc(renderFunction);
+  glutKeyboardFunc(keyboardInput);
+  glutMouseFunc(mouseInput);
+
   init();
 
   glutTimerFunc(1000 / FPS, timer, 0);
