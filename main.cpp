@@ -1,4 +1,4 @@
-#define INITIAL_FPS 2;
+#define INITIAL_FPS 4;
 
 #define ALIVE_CELL_COLOR glColor3f(0.0f, 0.0f, 0.0f);
 #define DEAD_CELL_COLOR glColor3f(1.0f, 1.0f, 1.0f);
@@ -13,11 +13,11 @@
 #include <iostream>
 #include <algorithm>
 
-const unsigned int WIDTH = 512;
-const unsigned int HEIGHT = 512;
+const unsigned int WIDTH = 1024;
+const unsigned int HEIGHT = 1024;
 
-const unsigned int ROWS = 40;
-const unsigned int COLUMNS = 40;
+const unsigned int ROWS = 140;
+const unsigned int COLUMNS = 140;
 
 unsigned int FPS = INITIAL_FPS;
 
