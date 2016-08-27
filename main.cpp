@@ -146,6 +146,9 @@ void timer(int) {
 }
 
 void keyboardInput(unsigned char key, int x, int y) {
+  unsigned int start_x;
+  unsigned int start_y;
+
   switch(key) {
     case 'c':
       initCells(false);
@@ -161,8 +164,8 @@ void keyboardInput(unsigned char key, int x, int y) {
       // glider gun
 
       initCells(false);
-      unsigned int start_x = (unsigned int)(ROWS / 2) - 18;
-      unsigned int start_y = (unsigned int)(COLUMNS / 2) - 4;
+      start_x = (unsigned int)(ROWS / 2) - 18;
+      start_y = (unsigned int)(COLUMNS / 2) - 4;
 
       cells[start_y][start_x] = true;
       cells[start_y][start_x + 1] = true;
@@ -213,6 +216,28 @@ void keyboardInput(unsigned char key, int x, int y) {
 
       cells[start_y + 2][start_x + 35] = true;
       cells[start_y + 3][start_x + 35] = true;
+
+      return;
+    case '2':
+      // acron
+
+      initCells(false);
+      start_x = (unsigned int)(ROWS / 2) - 3;
+      start_y = (unsigned int)(COLUMNS / 2) - 1;
+
+      unsigned int start_x = (unsigned int)(ROWS / 2) - 18;
+      unsigned int start_y = (unsigned int)(COLUMNS / 2) - 4;
+
+      cells[start_y][start_x] = true;
+
+      cells[start_y][start_x + 1] = true;
+      cells[start_y + 2][start_x + 1] = true;
+
+      cells[start_y + 1][start_x + 3] = true;
+
+      cells[start_y][start_x + 4] = true;
+      cells[start_y][start_x + 5] = true;
+      cells[start_y][start_x + 6] = true;
 
       return;
   }

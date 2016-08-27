@@ -17,6 +17,7 @@ mouse drag: revive cells
 
 # models
 1: glider gun
+2: acron
 ```
 
 ### Compile
