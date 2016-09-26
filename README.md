@@ -1,6 +1,6 @@
 Game Of Life
 ============
-Reference: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+Reference: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life and https://en.wikipedia.org/wiki/Cellular_automaton
 
 This is a simple implementation of the game of life in a finite space using c++ and opengl.
 
