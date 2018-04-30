@@ -90,3 +90,12 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+CMakeFiles/
+Win32/
+Debug/
+Release/
+*.vcxproj*
+*.sln
+CMakeCache*
+cmake_install*
